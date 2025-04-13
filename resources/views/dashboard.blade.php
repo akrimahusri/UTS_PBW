@@ -1,30 +1,34 @@
-<x-app-layout>
-    <div class="py-10 bg-gray-100 min-h-screen">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-8">
-                <h1 class="text-3xl font-bold text-gray-800 mb-4">
-                    Welcome, {{ Auth::user()->name }} 👋
-                </h1>
-                <p class="text-gray-600 mb-6">Ready to explore some delicious recipes?</p>
+@extends('layouts.app')
 
-                <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                    <!-- Card Example -->
-                    <div class="bg-blue-100 p-6 rounded-xl shadow hover:shadow-md transition">
-                        <h2 class="text-xl font-semibold mb-2 text-blue-800">Explore Recipes</h2>
-                        <p class="text-sm text-blue-700">Browse and find something yummy today.</p>
-                    </div>
+@section('content')
+<div class="max-w-7xl mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6">My Recipes</h1>
 
-                    <div class="bg-green-100 p-6 rounded-xl shadow hover:shadow-md transition">
-                        <h2 class="text-xl font-semibold mb-2 text-green-800">My Profile</h2>
-                        <p class="text-sm text-green-700">View or edit your profile details.</p>
-                    </div>
+    <a href="{{ route('recipes.create') }}" class="inline-block bg-green-600 text-white px-4 py-2 rounded mb-4">
+        + Create New Recipe
+    </a>
 
-                    <div class="bg-yellow-100 p-6 rounded-xl shadow hover:shadow-md transition">
-                        <h2 class="text-xl font-semibold mb-2 text-yellow-800">Create Recipe</h2>
-                        <p class="text-sm text-yellow-700">Share your own cooking creations.</p>
-                    </div>
-                </div>
-            </div>
+    @if (session('success'))
+        <div class="bg-green-100 text-green-800 px-4 py-2 rounded mb-4">
+            {{ session('success') }}
         </div>
-    </div>
-</x-app-layout>
+    @endif
+
+    @if ($recipes->count())
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            @foreach ($recipes as $recipe)
+                <div class="bg-white rounded shadow p-4">
+                    @if ($recipe->image_path)
+                        <img src="{{ asset('storage/' . $recipe->image_path) }}" alt="Recipe Image" class="w-full h-40 object-cover rounded mb-4">
+                    @endif
+                    <h2 class="text-xl font-semibold">{{ $recipe->title }}</h2>
+                    <p class="text-sm text-gray-600 mb-2">{{ $recipe->category }}</p>
+                    <a href="{{ route('recipes.show', $recipe->id) }}" class="text-blue-600 hover:underline">View Details</a>
+                </div>
+            @endforeach
+        </div>
+    @else
+        <p class="text-gray-600">You haven't created any recipes yet.</p>
+    @endif
+</div>
+@endsection

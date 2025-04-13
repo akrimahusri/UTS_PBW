@@ -24,21 +24,18 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(Request $request): RedirectResponse
+    public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $user = Auth::user();
-    
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'max:255', 'unique:users,username,'.$user->id],
-            'phone_number' => ['nullable', 'string', 'max:20'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$user->id],
-        ]);
-    
-        $user->update($request->only(['name', 'username', 'phone_number', 'email']));
-    
+        $request->user()->fill($request->validated());
+
+        if ($request->user()->isDirty('email')) {
+            $request->user()->email_verified_at = null;
+        }
+
+        $request->user()->save();
+
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
-    }    
+    }
 
     /**
      * Delete the user's account.

@@ -19,9 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'username',
         'email',
-        'phone_number',
         'password',
     ];
 
@@ -47,4 +45,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function reviews() {
+        return $this->hasMany(Review::class);
+    }    
 }

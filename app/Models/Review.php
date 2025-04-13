@@ -4,8 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Recipe;
+use App\Models\User;
 
-class Recipe extends Model
+
+class Review extends Model
 {
     use HasFactory;
 
@@ -27,10 +30,5 @@ class Recipe extends Model
     public function recipe()
     {
         return $this->belongsTo(Recipe::class); // Setiap review berhubungan dengan satu resep
-    }
-
-    public function reviews()
-    {
-        return $this->hasMany(Review::class);
     }
 }
