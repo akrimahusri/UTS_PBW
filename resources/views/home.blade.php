@@ -14,11 +14,12 @@
     </h1>
 
     <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-      <a href="#" 
-         style="padding: 12px 24px; background: #219ebc; color: white; border-radius: 8px; text-decoration: none; font-weight: 600; transition: background 0.3s;"
-         onmouseover="this.style.background='#1b90aa'" onmouseout="this.style.background='#219ebc'">
-         Explore Recipes
-      </a>
+    <a href="{{ route('dashboard') }}" 
+      style="padding: 12px 24px; background: #219ebc; color: white; border-radius: 8px; text-decoration: none; font-weight: 600; transition: background 0.3s;"
+      onmouseover="this.style.background='#1b90aa'" onmouseout="this.style.background='#219ebc'">
+      Explore Recipes
+    </a>
+
       <a href="{{ route('register') }}" 
          style="padding: 12px 24px; background: #023047; color: white; border-radius: 8px; text-decoration: none; font-weight: 600; transition: background 0.3s;"
          onmouseover="this.style.background='#021f34'" onmouseout="this.style.background='#023047'">
