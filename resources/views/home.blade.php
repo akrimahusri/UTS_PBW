@@ -54,51 +54,62 @@
 {{-- Spacer putih kecil --}}
 <div class="bg-white h-12 w-full"></div>
 
-{{-- Footer --}}
-<footer class="bg-[#3DA0A7] text-white font-[Poppins] px-6 py-12">
-  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-sm text-white">
-
-    {{-- Kiri: Social Media --}}
-    <div class="flex flex-col items-start md:items-start gap-4">
-      <img src="{{ asset('images/ig.png') }}" alt="Instagram" class="w-6 h-6">
-      <p class="text-sm">cooklabOfficial</p>
-
-      <img src="{{ asset('images/tiktok.png') }}" alt="TikTok" class="w-6 h-6 mt-4">
-      <p class="text-sm">cooklabOfficial</p>
-
-      <img src="{{ asset('images/youtube.png') }}" alt="Youtube" class="w-6 h-6 mt-4">
-      <p class="text-sm">cooklabOfficial</p>
-    </div>
-
-    {{-- Tengah: Terms & Contact --}}
-    <div class="flex flex-col items-start gap-4">
-      <h4 class="text-base font-semibold">Terms & Privacy</h4>
-      <a href="#" class="hover:underline">Terms of Service</a>
-      <a href="#" class="hover:underline">Privacy Policy</a>
-
-      <h4 class="text-base font-semibold mt-6">Contact Us</h4>
-      <div class="flex items-center gap-2">
-        <img src="{{ asset('images/email.png') }}" alt="Email" class="w-4 h-4">
-        <span>cooklab@gmail.com</span>
-      </div>
-      <div class="flex items-center gap-2">
-        <img src="{{ asset('images/phone.png') }}" alt="Phone" class="w-4 h-4">
-        <span>+62 8775434455</span>
-      </div>
-    </div>
-
-    {{-- Kanan: About CookLab --}}
-    <div class="md:text-right">
-      <h4 class="text-base font-semibold mb-4">About CookLab</h4>
-      <p class="text-white/90 text-sm leading-relaxed">
-        CookLab is a modern recipe platform made for everyone who loves to cook, explore, and share.
-        We aim to make cooking simple, inspiring, and accessible for all skill levels.
+<footer style="background-color: #70B9BE; font-family: 'Poppins', sans-serif; padding: 4rem 2rem; color: white;"> 
+  <div style="max-width: 1200px; margin: auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; align-items: start;">
+    
+    {{-- About --}}
+    <div style="text-align: left;">
+      <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem;">About CookLab</h4>
+      <p style="line-height: 1.6; font-size: 0.9rem;">
+        CookLab is a modern recipe platform made for everyone who loves to cook, explore, and share. 
+        We aim to make cooking simple, inspiring, and accessible for all skill levels. 
         Join us and turn everyday meals into something special.
       </p>
     </div>
+
+    {{-- Terms & Contact --}}
+    <div style="text-align: left; padding-left: 5rem;">
+      <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem;">Terms & Privacy</h4>
+      <ul style="list-style: none; padding: 0; margin: 0 0 1.5rem;">
+        <li style="margin-bottom: 0.5rem;">
+          <a href="#" style="color: white; text-decoration: none; font-size: 0.9rem;">Terms of Service</a>
+        </li>
+        <li>
+          <a href="#" style="color: white; text-decoration: none; font-size: 0.9rem;">Privacy Policy</a>
+        </li>
+      </ul>
+
+      <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem;">Contact Us</h4>
+      <p style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; margin-bottom: 0.5rem;">
+        <img src="{{ asset('images/email.png') }}" style="width: 16px;"> cookLab@gmail.com
+      </p>
+      <p style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">
+        <img src="{{ asset('images/phone.png') }}" style="width: 16px;"> +62 8775434455
+      </p>
+    </div>
+
+    {{-- Social Media --}}
+    <div style="text-align: left; padding-left: 8rem;">
+      <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem;">Follow Us</h4>
+      <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <img src="{{ asset('images/ig.png') }}" style="width: 20px;"> 
+          <span style="font-size: 0.9rem;">cooklabOfficial</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <img src="{{ asset('images/tiktok.png') }}" style="width: 20px;"> 
+          <span style="font-size: 0.9rem;">cooklabOfficial</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <img src="{{ asset('images/youtube.png') }}" style="width: 20px;"> 
+          <span style="font-size: 0.9rem;">cooklabOfficial</span>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="mt-12 text-center text-white/80 text-xs border-t border-white/20 pt-6">
+  {{-- Bottom line --}}
+  <div style="text-align: center; margin-top: 3rem; font-size: 0.75rem; opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 1rem;">
     &copy; {{ date('Y') }} CookLab. All rights reserved.
   </div>
 </footer>

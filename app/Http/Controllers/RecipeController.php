@@ -8,10 +8,18 @@ use App\Models\Recipe;
 
 class RecipeController extends Controller
 {
+    // Menampilkan resep publik di dashboard
     public function index()
     {
+        $recipes = Recipe::where('user_id', Auth::id())->with('ratings', 'reviews')->get();
+        return view('recipes.my-recipes', compact('recipes'));
+    }
+
+    // Menampilkan resep milik user sendiri
+    public function myRecipes()
+    {
         $recipes = Recipe::where('user_id', Auth::id())->latest()->get();
-        return view('dashboard', compact('recipes'));
+        return view('recipes.my-recipes', compact('recipes'));
     }
 
     public function create()
@@ -27,6 +35,7 @@ class RecipeController extends Controller
             'instructions' => 'required|string',
             'category' => 'nullable|string',
             'image' => 'nullable|image|max:2048',
+            'is_public' => 'nullable|boolean',
         ]);
 
         $path = null;
@@ -41,9 +50,10 @@ class RecipeController extends Controller
             'instructions' => $request->instructions,
             'category' => $request->category,
             'image_path' => $path,
+            'is_public' => $request->has('is_public'),
         ]);
 
-        return redirect()->route('dashboard')->with('success', 'Recipe created successfully!');
+        return redirect()->route('recipes.my')->with('success', 'Recipe created successfully!');
     }
 
     public function show($id)
@@ -68,6 +78,7 @@ class RecipeController extends Controller
             'instructions' => 'required|string',
             'category' => 'nullable|string',
             'image' => 'nullable|image|max:2048',
+            'is_public' => 'nullable|boolean',
         ]);
 
         if ($request->hasFile('image')) {
@@ -80,6 +91,7 @@ class RecipeController extends Controller
             'ingredients' => $request->ingredients,
             'instructions' => $request->instructions,
             'category' => $request->category,
+            'is_public' => $request->has('is_public'),
         ]);
 
         return redirect()->route('recipes.show', $recipe->id)->with('success', 'Recipe updated!');
@@ -90,6 +102,6 @@ class RecipeController extends Controller
         $recipe = Recipe::where('user_id', Auth::id())->findOrFail($id);
         $recipe->delete();
 
-        return redirect()->route('dashboard')->with('success', 'Recipe deleted!');
+        return redirect()->route('recipes.my')->with('success', 'Recipe deleted!');
     }
 }

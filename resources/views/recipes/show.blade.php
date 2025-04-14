@@ -25,10 +25,6 @@
         <p class="whitespace-pre-line text-gray-800">{{ $recipe->instructions }}</p>
     </div>
 
-    <a href="{{ route('recipes.edit', $recipe->id) }}"
-        class="inline-block mt-4 text-sm text-blue-600 hover:underline">✏️ Edit Recipe</a>
-    <br>
-
     <a href="{{ route('dashboard') }}"
        class="inline-block mt-4 text-sm text-blue-600 hover:underline">← Back to Dashboard</a>
 </div>
