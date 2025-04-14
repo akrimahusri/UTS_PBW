@@ -4,6 +4,10 @@
 <div class="max-w-7xl mx-auto p-6 bg-white shadow-md rounded-2xl mt-10">
     <h2 class="text-3xl font-bold text-gray-800 mb-6">My Recipes</h2>
 
+    <a href="{{ route('recipes.create') }}" class="inline-block bg-green-600 text-white px-4 py-2 rounded mb-6">
+        + Create New Recipe
+    </a>
+
     @if ($recipes->isEmpty())
         <p class="text-gray-600">You haven't added any recipes yet.</p>
     @else

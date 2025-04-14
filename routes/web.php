@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\ReviewController;
+use App\Models\Recipe;
 
 Route::get('/', function () {
     return view('home');
@@ -13,6 +14,11 @@ Route::get('/', function () {
 Route::get('/dashboard', [RecipeController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
+    
+Route::get('/dashboard', function () {
+    $recipes = Recipe::where('user_id', auth()->id())->get();
+    return view('dashboard', compact('recipes'));
+})->middleware(['auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     // Profil pengguna
@@ -38,5 +44,6 @@ Route::middleware('auth')->group(function () {
 
 // Review publik
 Route::get('/reviews', [ReviewController::class, 'index']);
+
 
 require __DIR__.'/auth.php';

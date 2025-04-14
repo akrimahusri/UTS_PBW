@@ -2,11 +2,6 @@
 
 @section('content')
 <div class="max-w-7xl mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold mb-6">My Recipes</h1>
-
-    <a href="{{ route('recipes.create') }}" class="inline-block bg-green-600 text-white px-4 py-2 rounded mb-4">
-        + Create New Recipe
-    </a>
 
     @if (session('success'))
         <div class="bg-green-100 text-green-800 px-4 py-2 rounded mb-4">
@@ -27,8 +22,10 @@
                 </div>
             @endforeach
         </div>
-    @else
-        <p class="text-gray-600">You haven't created any recipes yet.</p>
-    @endif
+        @else
+            <div class="flex items-center justify-center h-96">
+                <p class="text-gray-600 text-xl">Nothing here yet.</p>
+            </div>
+        @endif
 </div>
 @endsection
