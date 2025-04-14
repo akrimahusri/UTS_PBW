@@ -28,33 +28,37 @@ class RecipeController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'ingredients' => 'required|string',
-            'instructions' => 'required|string',
-            'category' => 'nullable|string',
-            'image' => 'nullable|image|max:2048',
-            'is_public' => 'nullable|boolean',
-        ]);
+{
+    $validated = $request->validate([
+        'title' => 'required|string|max:255',
+        'ingredients' => 'required|string',
+        'instructions' => 'required|string',
+        'category' => 'nullable|string',
+        'image' => 'nullable|image|max:2048',
+        'is_public' => 'nullable|boolean',
+    ]);
 
-        $path = null;
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('recipes', 'public');
-        }
+    $path = null;
+    if ($request->hasFile('image')) {
+        $path = $request->file('image')->store('recipes', 'public');
+    }
 
-        Recipe::create([
-            'user_id' => Auth::id(),
-            'title' => $request->title,
-            'ingredients' => $request->ingredients,
-            'instructions' => $request->instructions,
-            'category' => $request->category,
-            'image_path' => $path,
-            'is_public' => $request->has('is_public'),
-        ]);
+    // Simpan resep
+        $recipe = new Recipe();
+        $recipe->user_id = Auth::id();
+        $recipe->title = $validated['title'];
+        $recipe->ingredients = $validated['ingredients'];
+        $recipe->instructions = $validated['instructions'];
+        $recipe->category = $validated['category'] ?? null;
+        $recipe->image_path = $path;
+        $recipe->is_public = $request->has('is_public') ? true : false;
+        $recipe->save();
 
         return redirect()->route('recipes.my')->with('success', 'Recipe created successfully!');
     }
+
+       
+    
 
     public function show($id)
     {
