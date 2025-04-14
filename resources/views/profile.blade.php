@@ -24,7 +24,7 @@
     </div>
 
     <!-- Tombol Edit -->
-    <div class="pt-6 flex justify-end overflow-visible">
+    <div class="pt-6 flex justify-end">
     <a href="{{ route('profile.edit') }}"
        class="bg-yellow-500 text-white px-5 py-2 rounded-lg font-semibold hover:bg-yellow-600 transition">
         Edit Profile
